@@ -1,3 +1,5 @@
+import { rootPath } from '../../util/util.js';
+
 export default {
   state: {
     subscribers: [], 
@@ -8,30 +10,22 @@ export default {
     }
   },
   actions: {
-    initSubscribers({commit}) {
-      // TODO 3: Change http request for fetch
-      // Vue.http.get('subscribers')
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        console.log('***');
-        console.log(data);
-        if (data) {
-          const subscribers = data.data;
-          commit('setSubscribers', subscribers);
-        } else {
-          console.log('subscribers not fetched');
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    async fetchSubscribers(context) {
+      const response = await fetch(`${rootPath}subscribers`);
+      console.log(response);
+      const responseData = await response.json();
+      if (!response.ok || !responseData) {
+        const error = new Error(responseData.message || 'Failed to fetch subscribers.');  // TODO 5: display error in component
+        throw error;
+      }
+      const subscribers = responseData.data;  // TODO 5: refactor Node.js response object?
+      console.log(subscribers);
+      context.commit('setSubscribers', subscribers);
     },
     // delete(subscriber)
   },
   getters: {
-    subscribers: state => {
+    subscribers(state) {
       return state.subscribers;
     }
   }

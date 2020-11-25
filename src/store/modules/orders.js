@@ -1,48 +1,15 @@
+import { rootPath } from '../../util/util.js';
+
 export default {
 
   state: {
     orders: [],
     selectedOrder: null
-    // selectedOrder: {
-    //   client: {
-    //     address: "Amman, Serh alsheed st, tabrbour, jordan ",
-    //     city: "Amman",
-    //     company: "IVER",
-    //     country: "Jordan",
-    //     email: "mike@4x4autogroup.com",
-    //     name: "Mike Alsaid",
-    //     phone: "5715998877",
-    //     privacy: "I agree with Weibold's privacy policy",
-    //     status: "company",
-    //     vat: "",
-    //     zip: "1145"
-    //   },
-    //   meta: {
-    //     date: "2020-07-06T21:14:00.598Z",
-    //     orderId: "20200706211400"
-    //   },
-    //   payment: {
-    //     paid: true,
-    //     promo: Object,
-    //     id: "",
-    //     used: false
-    //   },
-    //   service: {
-    //     date: {
-    //       day: "2020-07-08T15:00:00.000Z",
-    //       time: "2020-07-08T15:00:00.000Z"
-    //     },
-    //     price: 100,
-    //     title: "Roadmap Towards Recovered Carbon Black as a Commodity",
-    //     type: "Webinar"
-    //   },
-    //   _id: "5f039418af93707e74b85956"
-    // }
   },
 
   mutations: {
-    setOrders(state, orders) {
-      state.orders = orders;
+    setOrders(state, payload) {
+      state.orders = payload;
     },
     selectOrder(state, payload) {
       state.selectedOrder = payload;
@@ -50,37 +17,29 @@ export default {
   },
 
   actions: {
-    initOrders({commit}) {
-      // TODO 3: Change for fetch
-      Vue.http.get('orders')
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        console.log('***');
-        console.log(data);
-        if (data) {
-          const orders = data.data;
-          commit('setOrders', orders);
-        } else {
-          console.log('data not fetched');
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      })
+    async fetchOrders(context) {
+      const response = await fetch(`${rootPath}orders`);
+      console.log(response);
+      const responseData = await response.json();
+      if (!response.ok || !responseData) {
+        const error = new Error(responseData.message || 'Failed to fetch orders.');  // TODO 5: display error in component
+        throw error;
+      }
+      const orders = responseData.data;  // TODO 5: refactor Node.js response object?
+      console.log(orders);
+      context.commit('setOrders', orders);
     },
-    selectOrder({commit}, payload) {
-      commit('selectOrder', payload);
+    selectOrder(context, payload) {
+      context.commit('selectOrder', payload);
       // 'selectOrder' is the name of the mutation we use
     }
   },
 
   getters: {
-    orders: state => {
+    orders(state) {
       return state.orders;
     },
-    selectedOrder: state => {
+    selectedOrder(state) {
       return state.selectedOrder;
     }
   }

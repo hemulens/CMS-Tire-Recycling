@@ -20,19 +20,19 @@ const router = createRouter({
       component: Home
     },
     { 
-      name: 'inquiries',
+      name: 'allInquiries',
       path: '/inquiries', 
       component: Inquiries 
     },
     { 
+      name: 'allSubscribers',
       path: '/subscribers', 
-      name: 'subscribers',
       component: Subscribers,
       children: [
         {
+          name: 'deleteSubscriber',
           path: '/delete/:subscriberId', 
           // component: Order, 
-          name: 'deleteSubscriber',
           beforeEnter: (to, from, next) => {
             console.log('Inside the delete subscriber');
             next();
@@ -41,31 +41,25 @@ const router = createRouter({
       ]
     },
     {
+      name: 'allOrders',
       path: '/orders', 
       component: Orders,
       children: [
         { 
           path: '',
-          component: OrderEmpty,
-          beforeEnter: (to, from, next) => {
-            console.log('Inside the empty order');
-            next();
-          }, 
+          component: OrderEmpty
         },
         { 
-          path: ':orderId', 
-          component: Order, 
           name: 'order',
-          beforeEnter: (to, from, next) => {
-            console.log('Inside the order');
-            next();
-          }
+          path: ':orderId', 
+          component: Order
         },
         { path: ':orderId/edit', component: OrderEdit }
       ]
     },
     { 
-      path: '*', 
+      name: 'error404',
+      path: '/:notFound(.*)', 
       component: Error404
       // redirect: '/orders' 
     },
