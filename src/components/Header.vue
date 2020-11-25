@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <router-link to="/" class="navbar-brand">
-      <img src="/src/assets/favicon-weibold.png" alt="Weibold Logo" class="logo">
+      <img src="../assets/favicon-weibold.png" alt="Weibold Logo" class="logo">
     </router-link>
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav mr-auto">
