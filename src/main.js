@@ -1,44 +1,34 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import VueResource from 'vue-resource';
+import { createApp } from 'vue';
 
+import router from './router.js';
+import store from './store/index.js';
 import App from './App.vue';
-import { routes } from './routes';
-import store from './store/store';
 
-Vue.use(VueRouter);
-Vue.use(VueResource);
+// TODO 1: Switch to filters in Vue 3.0
 
-Vue.http.options.root = 'http://localhost:3000/console/';
-
-Vue.filter('date', (value) => {
-  return new Date(value).toLocaleDateString('en-US', {month: 'long', day: 'numeric'});
-});
-Vue.filter('dateShort', (value) => {
-  return new Date(value).toLocaleDateString('en-US', {month: 'short', day: 'numeric'});
-});
-Vue.filter('time', (value) => {
-  return new Date(value).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
-});
-Vue.filter('currency', (value) => {
-  return '€ '+ Number(value).toFixed(2).toLocaleString();
-});
-// Vue.filter('reverse', (value) => {
-//   // slice to make a copy of array, then reverse the copy
-//   return value.slice().reverse();
+// Vue.filter('date', (value) => {
+//   return new Date(value).toLocaleDateString('en-US', {month: 'long', day: 'numeric'});
 // });
+// Vue.filter('dateShort', (value) => {
+//   return new Date(value).toLocaleDateString('en-US', {month: 'short', day: 'numeric'});
+// });
+// Vue.filter('time', (value) => {
+//   return new Date(value).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+// });
+// Vue.filter('currency', (value) => {
+//   return '€ '+ Number(value).toFixed(2).toLocaleString();
+// });
+// // Vue.filter('reverse', (value) => {
+// //   // slice to make a copy of array, then reverse the copy
+// //   return value.slice().reverse();
+// // });
 
-const router = new VueRouter({
-  mode: 'history',
-  routes: routes
-});
+// TODO 2: Set root address for http requests
+// Vue.http.options.root = 'http://localhost:3000/console/';
 
-new Vue({
-  el: '#app',
-  router: router,
-  store: store,
-  render: h => h(App)
-});
+const app = createApp(App);
 
+app.use(router);
+app.use(store);
 
-// 20200519144352
+app.mount('#app');
