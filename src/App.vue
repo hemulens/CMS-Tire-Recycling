@@ -17,13 +17,13 @@ export default {
 	components: {
 		appHeader: Header
 	},
-	created() {
-		console.log('created');
-		this.$store.dispatch('fetchInquiries');	 // TODO 4: Move to Inquiries component
-		this.$store.dispatch('fetchOrders');	 // TODO 4: Move to Orders component
-		this.$store.dispatch('fetchSubscribers');  // TODO 4: Move to Subscribers component
-		// this.$store.dispatch('initSelectedOrder');
-	}
+	// created() {
+	// 	console.log('created');
+	// 	this.$store.dispatch('fetchInquiries');	 // TODO 4: Move to Inquiries component
+	// 	this.$store.dispatch('fetchOrders');	 // TODO 4: Move to Orders component
+	// 	this.$store.dispatch('fetchSubscribers');  // TODO 4: Move to Subscribers component
+	// 	// this.$store.dispatch('initSelectedOrder');
+	// }
 };
 </script>
 

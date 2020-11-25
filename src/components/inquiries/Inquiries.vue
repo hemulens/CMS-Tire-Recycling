@@ -7,18 +7,22 @@
 <script>
   import Inquiry from './Inquiry.vue';
   export default {
-    data: function() {
+    components: {
+      appInquiry: Inquiry
+    },
+    data() {
       return {
         
       }
-    },
-    components: {
-      appInquiry: Inquiry
     },
     computed: {
       inquiries() {
         return this.$store.getters.inquiries;
       }
+    },
+    created() {
+      console.log('Created (Inquiries)');
+      this.$store.dispatch('fetchInquiries');
     }
   }
 </script>

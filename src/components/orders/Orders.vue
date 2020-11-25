@@ -49,26 +49,25 @@
 
 <script>
   import OrderListItem from './OrderListItem.vue';
-  import OrderEmpty from './OrderEmpty.vue';
+  // import OrderEmpty from './OrderEmpty.vue';
   export default {
-    data() {
-      return {
-        serviceTypes: ['All Services', 'Webinars', 'Reports'],
-      }
-    },
-    methods: {
-      
-    },
     components: {
       appOrderLi: OrderListItem,
+    },
+    data() {
+      return {
+        // Delete?
+        serviceTypes: ['All Services', 'Webinars', 'Reports'],
+      }
     },
     computed: {
       orders() {
         return this.$store.getters.orders;
       },
-      // selectedOrder() {
-      //   return this.$store.getters.selectedOrder;
-      // }
+    },
+    created() {
+      console.log('Created (Orders)');
+      this.$store.dispatch('fetchOrders');
     }
   }
 </script>
