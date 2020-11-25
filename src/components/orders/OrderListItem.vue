@@ -2,7 +2,7 @@
   <router-link class="card mb-1" v-bind:to="orderLink" activeClass="active" tag="div">
     <!-- <div class="card-header" v-on:click="selectOrder(order)"> -->
     <div class="card-header">
-      <b>{{ order.meta.date | date }}, {{ order.meta.date | time }} | {{ order.service.price | currency }}</b>
+      <b>{{ $filter.date(order.meta.date) }}, {{ $filter.time(order.meta.date) }} | {{ $filter.currency(order.service.price) }}</b>
       <br>
       {{ order.client.email }}
       <br>
@@ -26,9 +26,9 @@
       }
     },
     watch: {
-      '$route'(to, from) {
-        this.orderId = to.params.orderId;
-      }
+      // '$route'(to, from) {
+      //   this.orderId = to.params.orderId;
+      // }
     },
     methods: {
       // selectOrder(item) {

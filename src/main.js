@@ -28,6 +28,27 @@ import App from './App.vue';
 
 const app = createApp(App);
 
+// Filters (alternative to v2)
+app.config.globalProperties.$filters = {
+  date(val) {
+    return new Date(val).toLocaleDateString('en-US', {month: 'long', day: 'numeric'});
+  },
+  dateShort(val) {
+    return new Date(val).toLocaleDateString('en-US', {month: 'short', day: 'numeric'});
+  },
+  time(val) {
+    return new Date(val).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+  },
+  currency(val) {
+    return '€ '+ Number(val).toFixed(2).toLocaleString();
+  }
+};
+
+// Vue.filter('reverse', (value) => {
+//   // slice to make a copy of array, then reverse the copy
+//   return value.slice().reverse();
+// });
+
 app.use(router);
 app.use(store);
 

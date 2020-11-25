@@ -7,7 +7,7 @@
         {{ index }}
       </div>
       <div class="col-xl-2 col-lg-2">
-        {{ subscriber.date | dateShort }}, {{ subscriber.date | time }}
+        {{ $filters.dateShort(subscriber.date) }}, {{ $filters.time(subscriber.date) }}
       </div>
       <div class="col-xl-2 col-lg-2">
         {{ subscriber.country }}

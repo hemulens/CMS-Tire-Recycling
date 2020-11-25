@@ -36,20 +36,20 @@
             <div class="col-xl-3 col-lg-3 col-md-3">Title:</div>
             <div class="col-xl-9 col-lg-9">{{selectedOrder.service.type}} "{{selectedOrder.service.title}}"</div>
             <div class="col-xl-3 col-lg-3 col-md-3">Price:</div>
-            <div class="col-xl-9 col-lg-9">{{selectedOrder.service.price | currency}}</div>
+            <div class="col-xl-9 col-lg-9">{{$filter.currency(selectedOrder.service.price)}}</div>
           </div>
           <div class="form-row" v-if="selectedOrder.service.type == 'Webinar'">
             <div class="col-xl-3 col-lg-3 col-md-3">Date:</div>
-            <div class="col-xl-9 col-lg-9">{{selectedOrder.service.date.day | date}}</div>
+            <div class="col-xl-9 col-lg-9">{{$filter.date(selectedOrder.service.date.day)}}</div>
             <div class="col-xl-3 col-lg-3 col-md-3">Time:</div>
-            <div class="col-xl-9 col-lg-9">{{selectedOrder.service.date.time | time}}</div>
+            <div class="col-xl-9 col-lg-9">{{$filter.time(selectedOrder.service.date.time)}}</div>
           </div>
           <br>
           <h4>Meta</h4>
           <div class="form-row">
             <div class="col-xl-3 col-lg-3 col-md-3">Received on:</div>
             <div class="col-xl-9 col-lg-9">
-              {{ selectedOrder.meta.date | date }}, {{ selectedOrder.meta.date | time }}
+              {{ $filter.date(selectedOrder.meta.date) }}, {{ $filter.time(selectedOrder.meta.date) }}
             </div>
             <div class="col-xl-3 col-lg-3 col-md-3">Order ID:</div>
             <div class="col-xl-9 col-lg-9">

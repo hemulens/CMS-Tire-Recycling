@@ -3,7 +3,7 @@
     <div class="card mb-4">
       <div class="card-header">
         <div class="float-left float-xl-left float-lg-left float-md-left float-sm-left">
-          {{ inquiry.date | date }}, {{ inquiry.date | time }}
+          {{ $filters.date(inquiry.date) }}, {{ $filters.time(inquiry.date) }}
         </div>
         <div class="float-right float-xl-right float-lg-right float-md-right float-sm-right">
           {{ inquiry.country }}
