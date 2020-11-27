@@ -1,7 +1,9 @@
 <template>
+<div class="container-fluid">
   <div class="row">
     <app-inquiry v-for="inquiry in inquiries" v-bind:key="inquiry._id" v-bind:inquiry="inquiry"></app-inquiry>
   </div>
+</div>
 </template>
 
 <script>

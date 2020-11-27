@@ -12,17 +12,27 @@ export default {
   actions: {
     async fetchSubscribers(context) {
       const response = await fetch(`${rootPath}subscribers`);
-      console.log(response);
       const responseData = await response.json();
       if (!response.ok || !responseData) {
         const error = new Error(responseData.message || 'Failed to fetch subscribers.');  // TODO 5: display error in component
         throw error;
       }
       const subscribers = responseData.data;  // TODO 5: refactor Node.js response object?
-      console.log(subscribers);
       context.commit('setSubscribers', subscribers);
     },
-    // delete(subscriber)
+    async deleteSubscriber(context, payload) {
+      const response = await fetch(`${rootPath}subscribers/delete/${payload}`, {
+        method: 'DELETE'
+      });
+      const responseData = await response.json();
+      console.log(responseData);
+      if (!response.ok || !responseData) {
+        const error = new Error(responseData.message || 'Failed to fetch subscribers.');  // TODO 5: display error in component
+        throw error;
+      }
+      // Refresh subscribers list
+      context.dispatch('fetchSubscribers');
+    }
   },
   getters: {
     subscribers(state) {

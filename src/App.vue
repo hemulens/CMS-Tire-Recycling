@@ -1,14 +1,10 @@
 <template>
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-lg-12 col-12">
-			<app-header></app-header>
-				<transition name="slide" mode="out-in">
-					<router-view></router-view>
-				</transition>
-			</div>
-		</div>
-	</div>
+	<app-header></app-header>
+	<main>
+		<transition name="slide" mode="out-in">
+			<router-view></router-view>
+		</transition>
+	</main>
 </template>
 
 <script>
@@ -30,11 +26,62 @@ export default {
 
 
 
-<style>
-	body {
-		padding: 30px;
-		font-size: 14px;
+<style lang="scss">
+	/* Fonts */
+	@font-face {
+		font-family: "PublicaPlay-Thin";
+		src: url('~@/assets/fonts/PublicaPlay/PublicaPlay-Thin.otf');
 	}
+	@font-face {
+		font-family: "PublicaPlay-ExtraLight";
+		src: url('~@/assets/fonts/PublicaPlay/PublicaPlay-ExtraLight.otf');
+	}
+	@font-face {
+		font-family: "PublicaPlay-UltraLight";
+		src: url('~@/assets/fonts/PublicaPlay/PublicaPlay-UltraLight.otf');
+	}
+	@font-face {
+		font-family: "PublicaPlay-Light";
+		src: url('~@/assets/fonts/PublicaPlay/PublicaPlay-Light.otf');
+	}
+	@font-face {
+		font-family: "PublicaPlay-Regular";
+		src: url('~@/assets/fonts/PublicaPlay/PublicaPlay-Regular.otf');
+	}
+	@font-face {
+		font-family: "PublicaPlay-Medium";
+		src: url('~@/assets/fonts/PublicaPlay/PublicaPlay-Medium.otf');
+	}
+	@font-face {
+		font-family: "PublicaPlay-Bold";
+		src: url('~@/assets/fonts/PublicaPlay/PublicaPlay-Bold.otf');
+	}
+	@font-face {
+		font-family: "PublicaPlay-ExtraBold";
+		src: url('~@/assets/fonts/PublicaPlay/PublicaPlay-ExtraBold.otf');
+	}
+	@font-face {
+		font-family: "PublicaPlay-Black";
+		src: url('~@/assets/fonts/PublicaPlay/PublicaPlay-Black.otf');
+	}
+	// General styles
+	body {
+		margin-top: 41px;
+		font-size: 12px;
+	}
+	// Global table settings
+	// .table {
+	// 	th {
+	// 		:first-child {
+	// 			padding-left: 15px;
+	// 		}
+	// 		:last-child {
+	// 			padding-right: 10px;
+	// 		}
+	// 	}
+	// }	
+
+
 	/* Orders (sort & move later) */
 	/* Lists */
 	.item-list {
@@ -52,17 +99,7 @@ export default {
 		bottom: 20px;
 		right: 25px;
 	}
-	/* Buttons */
-	.btn.btn-icon {
-		/* padding: 3px 8px; */
-		width: 28px;
-		height: 28px;
-	}
-	.btn-icon i {
-		position: relative;
-		left: -275%;
-		top: -5px;
-	}
+	
 
 	/* Sliders */
 	.slide-enter-active {
