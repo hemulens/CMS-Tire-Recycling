@@ -32,6 +32,21 @@ export default {
       }
       // Refresh subscribers list
       context.dispatch('fetchSubscribers');
+    },
+    async saveSubscriber(context, payload) {
+      const response = await fetch(`${rootPath}subscribers/${payload}/save`, {
+        method: 'PUT',
+        headers: '',
+        body: ''
+      });
+      const responseData = await response.json();
+      console.log(responseData);
+      if (!response.ok || !responseData) {
+        const error = new Error(responseData.message || 'Failed to save the subscriber.');  // TODO 5: display error in component
+        throw error;
+      }
+      // Refresh subscribers list
+      context.dispatch('fetchSubscribers');
     }
   },
   getters: {
