@@ -21,7 +21,7 @@ export default {
       context.commit('setSubscribers', subscribers);
     },
     async deleteSubscriber(context, payload) {
-      const response = await fetch(`${rootPath}subscribers/delete/${payload}`, {
+      const response = await fetch(`${rootPath}subscribers/${payload}/delete`, {
         method: 'DELETE'
       });
       const responseData = await response.json();
