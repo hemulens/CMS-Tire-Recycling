@@ -34,11 +34,14 @@ export default {
       context.dispatch('fetchSubscribers');
     },
     async saveSubscriber(context, payload) {
-      const response = await fetch(`${rootPath}subscribers/${payload}/save`, {
+      const response = await fetch(`${rootPath}subscribers/save`, {
+        headers: {
+          'Content-Type': 'application/json'
+        },
         method: 'PUT',
-        headers: '',
-        body: ''
+        body: JSON.stringify(payload)
       });
+      console.log(payload);
       const responseData = await response.json();
       console.log(responseData);
       if (!response.ok || !responseData) {

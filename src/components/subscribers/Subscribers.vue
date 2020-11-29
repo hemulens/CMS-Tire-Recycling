@@ -10,6 +10,8 @@
           <th scope="col">Name</th>
           <th scope="col">Email</th>
           <th scope="col">Phone</th>
+          <th scope="col">Experience</th>
+          <th scope="col" class="controls-column"></th>
         </tr>
       </thead>
       <tbody>
@@ -47,8 +49,8 @@ body {
   padding: 0;
 }
 table {
-  .sticky {
-    position: sticky;
+  th.controls-column {
+    width: 50px;
   }
 }
 </style>
