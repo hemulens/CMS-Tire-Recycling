@@ -27,7 +27,7 @@ export default {
       const responseData = await response.json();
       console.log(responseData);
       if (!response.ok || !responseData) {
-        const error = new Error(responseData.message || 'Failed to fetch subscribers.');  // TODO 5: display error in component
+        const error = new Error(responseData.message || 'Failed to destroy the subscriber.');  // TODO 5: display error in component
         throw error;
       }
       // Refresh subscribers list

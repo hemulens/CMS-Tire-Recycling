@@ -1,0 +1,18 @@
+1) Subscribers
+  - error handing: Subscribers
+  - freeze table head
+  - disable edit mode for multiple items at once
+  - add search
+  - disable console.log's
+  – add transitions & animations
+  – add loading spinner
+
+2) Inquiries
+  - choose layout
+  - design a fixed/sticky search panel
+  – create a table structure
+  – create a component holding an 
+
+3) Orders
+
+4) 

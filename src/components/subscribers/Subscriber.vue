@@ -66,7 +66,6 @@
 		<td>{{ $filters.time(subscriber.date) }}</td>
 		<td>
 			<select
-				type="text"
 				v-model="record.country"
 				class="form-control form-control-sm"
 			>
