@@ -19,7 +19,7 @@
                 <option v-for="country in countries" :key="country">{{ country }}</option>
               </select>
             </div>
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-2">
               <button type="submit" class="btn btn-secondary btn-sm">
                 Search
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

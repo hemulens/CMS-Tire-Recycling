@@ -67,7 +67,7 @@
 		<td>
 			<select
 				v-model="record.country"
-				class="form-control form-control-sm"
+				class="form-control form-control-sm custom-select custom-select-sm"
 			>
 				<option v-for="country in countries" :key="country">{{
 					country
@@ -96,7 +96,7 @@
 			/>
 		</td>
 		<td>
-			<select v-model="record.bgr" class="form-control form-control-sm">
+			<select v-model="record.bgr" class="form-control form-control-sm custom-select custom-select-sm">
 				<option value="I am new to tire recycling / pyrolysis">false</option>
 				<option value="I run tire recycling / pyrolysis business">true</option>
 			</select>
@@ -243,7 +243,7 @@ tr {
 select {
 	&.form-control {
 		&.form-control-sm {
-			padding: 0 0.12rem;
+			padding: 0 0.35rem;
 		}
 	}
 }
