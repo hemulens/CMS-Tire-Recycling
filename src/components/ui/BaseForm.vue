@@ -4,16 +4,14 @@
 	</div>
 </template>
 
-<script>
-export default {
-	data() {
-		return {
-
-		};
-	},
-};
-</script>
-
-<style lang="scss" scoped>
-
+<style lang="scss">
+.form-control-sm {
+	font-size: inherit;
+}
+select {
+	.form-control-sm, .custom-select-sm {
+			padding-left: 0.12rem;
+			padding-right: 0.12rem;
+		}
+}
 </style>
