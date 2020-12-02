@@ -14,4 +14,9 @@ select {
 			padding-right: 0.12rem;
 		}
 }
+.btn {
+	&.btn-sm {
+		font-size: inherit;
+	}
+}
 </style>
