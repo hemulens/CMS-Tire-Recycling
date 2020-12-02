@@ -7,10 +7,10 @@
 </template>
 
 <script>
-import Header from './components/Header.vue';
+import AppHeader from './components/AppHeader.vue';
 export default {
 	components: {
-		appHeader: Header
+		AppHeader
 	},
 	// created() {
 	// 	console.log('created');

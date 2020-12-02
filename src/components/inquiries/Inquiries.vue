@@ -1,6 +1,7 @@
 <template>
 <div class="container-fluid">
   <div class="row">
+    <search-form></search-form>
     <app-inquiry v-for="inquiry in inquiries" v-bind:key="inquiry._id" v-bind:inquiry="inquiry"></app-inquiry>
   </div>
 </div>
@@ -8,9 +9,11 @@
 
 <script>
   import Inquiry from './Inquiry.vue';
+  import SearchForm from '../search/SearchForm.vue';
   export default {
     components: {
-      appInquiry: Inquiry
+      AppInquiry: Inquiry,
+      SearchForm: SearchForm
     },
     data() {
       return {
