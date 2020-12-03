@@ -40,7 +40,7 @@ const countries = [
   'China',
   'Colombia',
   'Comoros',
-  'Congo (Brazzaville)',
+  'Congo',
   'Congo',
   'Costa Rica',
   "Cote d'Ivoire",

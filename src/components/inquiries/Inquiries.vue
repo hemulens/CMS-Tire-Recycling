@@ -1,18 +1,29 @@
 <template>
-<div class="container-fluid">
-  <div class="row">
-    <search-form></search-form>
-    <app-inquiry v-for="inquiry in inquiries" v-bind:key="inquiry._id" v-bind:inquiry="inquiry"></app-inquiry>
+  <div class="container-fluid">
+    <div class="row">
+      <search-form></search-form>
+    </div>
   </div>
-</div>
+  <div class="container-fluid">
+    <div class="form-row">
+      <div class="col-md-5 item-list">
+        <app-inquiry v-for="inquiry in inquiries" v-bind:key="inquiry._id" v-bind:inquiry="inquiry"></app-inquiry>
+      </div>
+      <div class="col-md-7">
+        <inquiry-details></inquiry-details>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
   import Inquiry from './Inquiry.vue';
+  import InquiryDetails from './InquiryDetails.vue';
   import SearchForm from '../search/SearchForm.vue';
   export default {
     components: {
       AppInquiry: Inquiry,
+      InquiryDetails: InquiryDetails,
       SearchForm: SearchForm
     },
     data() {
@@ -31,4 +42,12 @@
     }
   }
 </script>
+
+<style scoped>
+.item-list {
+  overflow: -moz-scrollbars-vertical; 
+  overflow-y: scroll;
+  height: 80vh;
+}
+</style>
 

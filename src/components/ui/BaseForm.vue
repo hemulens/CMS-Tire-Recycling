@@ -9,10 +9,14 @@
 	font-size: inherit;
 }
 select {
-	.form-control-sm, .custom-select-sm {
-			padding-left: 0.12rem;
-			padding-right: 0.12rem;
-		}
+	.form-control-sm  {
+		padding-left: 0.12rem;
+		padding-right: 0.12rem;
+	}
+	&.custom-select {
+		display: block;
+		border-radius: 0.2rem;
+	}
 }
 .btn {
 	&.btn-sm {

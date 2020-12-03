@@ -3,11 +3,16 @@ import { rootPath } from '../../util/util.js';
 
 export default {
   state: {
-    inquiries: []
+    inquiries: [],
+    selectedInquiry: null
   },
   mutations: {
     setInquiries(state, payload) {
       state.inquiries = payload;
+    },
+    selectInquiry(state, payload) {
+      state.selectedInquiry = payload;
+      console.log(payload);
     }
   },
   actions: {
@@ -59,6 +64,9 @@ export default {
   getters: {
     inquiries(state) {
       return state.inquiries;
+    },
+    selectedInquiry(state) {
+      return state.selectedInquiry;
     }
   }
 };
