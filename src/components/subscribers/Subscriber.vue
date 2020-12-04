@@ -15,7 +15,7 @@
 		<td>{{ subscriber.name }}</td>
 		<td>{{ subscriber.email }}</td>
 		<td>{{ subscriber.phone }}</td>
-		<td>{{ bgrFiltered }}</td>
+		<td>{{ $filters.experience(record.bgr) }}</td>
 		<td>
 			<div class="options-icon" v-show="itemHovered">
 				<!-- edit icon -->
@@ -159,24 +159,24 @@ export default {
 			}
 		};
 	},
-	computed: {
-		bgrFiltered() {
-			if (!this.record.bgr) {
-				return '–';
-			} else if (
-				typeof (this.record.bgr === Array) &&
-				this.record.bgr.length === 2
-			) {
-				return 'SPAM';
-			} else if (this.record.bgr.search('run') != -1) {
-				return 'true';
-			} else if (this.record.bgr.search('new') != -1) {
-				return 'false';
-			} else {
-				return '–';
-			}
-		},
-	},
+	// computed: {
+	// 	// bgrFiltered() {
+	// 	// 	if (!this.record.bgr) {
+	// 	// 		return '–';
+	// 	// 	} else if (
+	// 	// 		typeof (this.record.bgr === Array) &&
+	// 	// 		this.record.bgr.length === 2
+	// 	// 	) {
+	// 	// 		return 'SPAM';
+	// 	// 	} else if (this.record.bgr.search('run') != -1) {
+	// 	// 		return 'true';
+	// 	// 	} else if (this.record.bgr.search('new') != -1) {
+	// 	// 		return 'false';
+	// 	// 	} else {
+	// 	// 		return '–';
+	// 	// 	}
+	// 	// },
+	// },
 	methods: {
 		itemHover(hover) {
 			this.itemHovered = hover;

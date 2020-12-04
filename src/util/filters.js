@@ -11,6 +11,22 @@ export default {
   },
   currency(val) {
     return '€ '+ Number(val).toFixed(2).toLocaleString();
+  },
+  experience(val) {
+    if (!val) {
+      return '–';
+    } else if (
+      typeof (val === Array) &&
+      val.length === 2
+    ) {
+      return 'SPAM';
+    } else if (val.search('run') != -1) {
+      return 'true';
+    } else if (val.search('new') != -1) {
+      return 'false';
+    } else {
+      return '–';
+    }
   }
 };
 // Vue.filter('reverse', (value) => {

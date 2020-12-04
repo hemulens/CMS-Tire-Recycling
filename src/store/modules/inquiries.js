@@ -4,7 +4,8 @@ import { rootPath } from '../../util/util.js';
 export default {
   state: {
     inquiries: [],
-    selectedInquiry: null
+    selectedInquiry: null,
+    page: 1
   },
   mutations: {
     setInquiries(state, payload) {
@@ -17,7 +18,7 @@ export default {
   },
   actions: {
     async fetchInquiries(context) {
-      const response = await fetch(`${rootPath}inquiries`);
+      const response = await fetch(`${rootPath}inquiries?page=1`);
       console.log(response);
       console.log(`RootPath: ${rootPath}`);
       const responseData = await response.json();

@@ -1,5 +1,5 @@
 <template>
-  <div class="card mb-1" @click="openInquiry(inquiry)">
+  <div class="card mb-1" :class="{active: isSelected}" @click="openInquiry(inquiry)">
     <div class="card-body">
       <div class="form-row">
         <div class="col-4">
@@ -37,11 +37,24 @@
 
 <script>
   export default {
-    props: ['inquiry'],
+    props: ['inquiry', 'selectedId'],
+    // data() {
+    //   return {
+
+    //   }
+    // },
+    computed: {
+      isSelected() {
+        return this.inquiry._id === this.selectedId;
+      }
+    },
     methods: {
       openInquiry(inquiry) {
         this.$store.commit('selectInquiry', inquiry);
       }
+    },
+    created() {
+      console.log(this.isSelected);
     }
   }
 </script>
@@ -50,6 +63,10 @@
   .card {
     &:hover {
       cursor: pointer;
+      background-color: rgba(0,0,0,.03);
+    }
+    &.active {
+      background-color: rgba(0,0,0,.03);
     }
   }
   .card-body {

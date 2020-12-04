@@ -7,7 +7,7 @@
   <div class="container-fluid">
     <div class="form-row">
       <div class="col-md-5 item-list">
-        <app-inquiry v-for="inquiry in inquiries" v-bind:key="inquiry._id" v-bind:inquiry="inquiry"></app-inquiry>
+        <app-inquiry v-for="inquiry in inquiries" :key="inquiry._id" :inquiry="inquiry" :selectedId="selectedInquiryId"></app-inquiry>
       </div>
       <div class="col-md-7">
         <inquiry-details></inquiry-details>
@@ -34,8 +34,16 @@
     computed: {
       inquiries() {
         return this.$store.getters.inquiries;
+      },
+      selectedInquiryId() {
+        const selectedInquiry = this.$store.getters.selectedInquiry;
+        if (!selectedInquiry) {
+          return null;
+        }
+        return selectedInquiry._id;
       }
     },
+    
     created() {
       console.log('Created (Inquiries)');
       this.$store.dispatch('fetchInquiries');
