@@ -13,22 +13,40 @@ export default {
     },
     selectInquiry(state, payload) {
       state.selectedInquiry = payload;
-      console.log(payload);
+    },
+    spliceInquiries(state, payload) {
+      state.inquries = state.inquiries.concat(payload);
+      console.log('state.inquiries');
+      console.log(state.inquries);
     }
   },
   actions: {
     async fetchInquiries(context) {
       const response = await fetch(`${rootPath}inquiries?page=1`);
-      console.log(response);
-      console.log(`RootPath: ${rootPath}`);
+      // console.log(response);
+      // console.log(`RootPath: ${rootPath}`);
       const responseData = await response.json();
       if (!response.ok || !responseData) {
         const error = new Error(responseData.message || 'Failed to fetch inquiries.');  // TODO 5: display error in component
         throw error;
       }
       const inquiries = responseData.data;  // TODO 5: refactor Node.js response object?
-      console.log(inquiries);
+      // console.log(inquiries);
       context.commit('setInquiries', inquiries);
+    },
+    async loadMoreInquiries(context, payload) {
+      const response = await fetch(`${rootPath}inquiries?page=${payload}`);
+      // console.log(response);
+      // console.log(`RootPath: ${rootPath}`);
+      const responseData = await response.json();
+      if (!response.ok || !responseData) {
+        const error = new Error(responseData.message || 'Failed to fetch inquiries.');  // TODO 5: display error in component
+        throw error;
+      }
+      const inquiries = responseData.data;  // TODO 5: refactor Node.js response object?
+      // console.log(inquiries);
+      context.commit('spliceInquiries', inquiries);
+      console.log('Success');
     },
     async deleteInquiry(context, payload) {
       const response = await fetch(`${rootPath}inquiry/${payload}/delete`, {

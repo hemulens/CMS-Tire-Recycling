@@ -53,9 +53,9 @@
         this.$store.commit('selectInquiry', inquiry);
       }
     },
-    created() {
-      console.log(this.isSelected);
-    }
+    // created() {
+    //   console.log(this.isSelected);
+    // }
   }
 </script>
 

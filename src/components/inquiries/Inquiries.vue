@@ -8,6 +8,7 @@
     <div class="form-row">
       <div class="col-md-5 item-list">
         <app-inquiry v-for="inquiry in inquiries" :key="inquiry._id" :inquiry="inquiry" :selectedId="selectedInquiryId"></app-inquiry>
+        <button @click="loadMore" class="btn btn-secondary btn-sm btn-block">Load more</button>
       </div>
       <div class="col-md-7">
         <inquiry-details></inquiry-details>
@@ -28,7 +29,7 @@
     },
     data() {
       return {
-        
+        currentPage: 1
       }
     },
     computed: {
@@ -43,9 +44,21 @@
         return selectedInquiry._id;
       }
     },
-    
+    watch: {
+      inquiries() {
+        return this.$store.getters.inquiries;
+      }
+    },
+    methods: {
+      loadMore() {
+        this.currentPage++;
+        this.$store.dispatch('loadMoreInquiries', this.currentPage);
+        // console.log('loadMore');
+        // console.log(this.$store.getters.inquiries);
+        this.inquiries = this.$store.getters.inquiries;
+      }
+    },
     created() {
-      console.log('Created (Inquiries)');
       this.$store.dispatch('fetchInquiries');
     }
   }
