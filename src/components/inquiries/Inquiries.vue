@@ -30,7 +30,8 @@
 				</button>
 			</div>
 			<div class="col-md-6 pt-1">
-				<inquiry-details :page="currentPage"></inquiry-details>
+				<!-- <inquiry-details :page="currentPage"></inquiry-details> -->
+        <router-view :page="currentPage"></router-view>
 			</div>
 		</div>
 	</div>
@@ -38,12 +39,12 @@
 
 <script>
 import Inquiry from './Inquiry.vue';
-import InquiryDetails from './InquiryDetails.vue';
+// import InquiryDetails from './InquiryDetails.vue';
 import SearchForm from '../search/SearchForm.vue';
 export default {
 	components: {
 		AppInquiry: Inquiry,
-		InquiryDetails: InquiryDetails,
+		// InquiryDetails: InquiryDetails,
 		SearchForm: SearchForm,
 	},
 	data() {

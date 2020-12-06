@@ -2,7 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 import Home from './components/Home.vue';
 import Inquiries from './components/inquiries/Inquiries.vue';
+import InquiryDetails from './components/inquiries/InquiryDetails.vue';
 import Subscribers from './components/subscribers/Subscribers.vue';
+
 import Orders from './components/orders/Orders.vue';
 import Order from './components/orders/Order.vue';
 import OrderEdit from './components/orders/OrderEdit.vue';
@@ -22,23 +24,20 @@ const router = createRouter({
     { 
       name: 'allInquiries',
       path: '/inquiries', 
-      component: Inquiries 
+      component: Inquiries,
+      children: [
+        { 
+          name: 'inquiryDetails',
+          path: ':inquiryId', 
+          component: InquiryDetails,
+          props: true
+        },
+      ]
     },
     { 
       name: 'allSubscribers',
       path: '/subscribers', 
-      component: Subscribers,
-      children: [
-        {
-          name: 'deleteSubscriber',
-          path: '/delete/:subscriberId', 
-          // component: Order, 
-          beforeEnter: (to, from, next) => {
-            console.log('Inside the delete subscriber');
-            next();
-          }
-        }
-      ]
+      component: Subscribers
     },
     {
       name: 'allOrders',

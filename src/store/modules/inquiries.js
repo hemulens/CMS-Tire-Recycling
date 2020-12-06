@@ -14,6 +14,7 @@ export default {
     selectInquiry(state, payload) {
       state.selectedInquiry = payload;
     },
+    // change
     mergeInquiries(state, payload) {
       // for (const item of payload) {
       //   state.inquiries.push(item);
