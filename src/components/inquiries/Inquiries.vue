@@ -6,11 +6,12 @@
   </div>
   <div class="container-fluid">
     <div class="form-row">
-      <div class="col-md-5 item-list">
-        <app-inquiry v-for="inquiry in inquiries" :key="inquiry._id" :inquiry="inquiry" :selectedId="selectedInquiryId"></app-inquiry>
-        <button @click="loadMore" class="btn btn-secondary btn-sm btn-block">Load more</button>
+      <div class="col-md-6 item-list pt-1">
+        <button v-if="!onFirstPage" @click="loadMore('-')" class="btn btn-secondary btn-sm btn-block mb-1">Newer Inquiries</button>
+        <app-inquiry v-for="(inquiry, index) in inquiries" :key="inquiry._id" :inquiry="inquiry" :index="index" :page="currentPage" :selectedId="selectedInquiryId"></app-inquiry>
+        <button @click="loadMore('+')" class="btn btn-secondary btn-sm btn-block">Older Inquiries</button>
       </div>
-      <div class="col-md-7">
+      <div class="col-md-6 pt-1">
         <inquiry-details></inquiry-details>
       </div>
     </div>
@@ -29,7 +30,8 @@
     },
     data() {
       return {
-        currentPage: 1
+        currentPage: 1,
+        // inqPerPage: 100,
       }
     },
     computed: {
@@ -42,20 +44,20 @@
           return null;
         }
         return selectedInquiry._id;
-      }
-    },
-    watch: {
-      inquiries() {
-        return this.$store.getters.inquiries;
+      },
+      onFirstPage() {
+        return this.currentPage === 1;
       }
     },
     methods: {
-      loadMore() {
-        this.currentPage++;
+      loadMore(page) {
+        if (page === '+') {
+          this.currentPage++;
+        } else if (page === '-') {
+          this.currentPage--;
+        }
         this.$store.dispatch('loadMoreInquiries', this.currentPage);
-        // console.log('loadMore');
         // console.log(this.$store.getters.inquiries);
-        this.inquiries = this.$store.getters.inquiries;
       }
     },
     created() {

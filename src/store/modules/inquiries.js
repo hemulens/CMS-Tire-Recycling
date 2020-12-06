@@ -14,10 +14,12 @@ export default {
     selectInquiry(state, payload) {
       state.selectedInquiry = payload;
     },
-    spliceInquiries(state, payload) {
-      state.inquries = state.inquiries.concat(payload);
-      console.log('state.inquiries');
-      console.log(state.inquries);
+    mergeInquiries(state, payload) {
+      // state.inquries = [].concat(state.inquiries, payload);
+      // for (const item of payload) {
+      //   state.inquiries.push(item);
+      // }
+      state.inquiries = payload;
     }
   },
   actions: {
@@ -45,7 +47,7 @@ export default {
       }
       const inquiries = responseData.data;  // TODO 5: refactor Node.js response object?
       // console.log(inquiries);
-      context.commit('spliceInquiries', inquiries);
+      context.commit('mergeInquiries', inquiries);
       console.log('Success');
     },
     async deleteInquiry(context, payload) {

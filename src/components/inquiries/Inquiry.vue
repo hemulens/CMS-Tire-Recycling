@@ -2,7 +2,10 @@
   <div class="card mb-1" :class="{active: isSelected}" @click="openInquiry(inquiry)">
     <div class="card-body">
       <div class="form-row">
-        <div class="col-4">
+        <div class="col-1">
+          {{ adjustedIndex }}
+        </div>
+        <div class="col-3">
           {{ $filters.dateShort(inquiry.date) }}, {{ $filters.time(inquiry.date) }}
         </div>
         <div class="col-4">
@@ -37,16 +40,19 @@
 
 <script>
   export default {
-    props: ['inquiry', 'selectedId'],
-    // data() {
-    //   return {
-
-    //   }
-    // },
+    props: ['inquiry', 'selectedId', 'index', 'page'],
+    data() {
+      return {
+        inqPerPage: 100
+      }
+    },
     computed: {
       isSelected() {
         return this.inquiry._id === this.selectedId;
-      }
+      },
+      adjustedIndex() {
+        return this.inqPerPage * (this.page - 1) + (this.index + 1);
+      },
     },
     methods: {
       openInquiry(inquiry) {
