@@ -15,7 +15,7 @@
         </tr>
       </thead>
       <tbody>
-        <app-subscriber v-for="(subscriber, index) in subscribers.slice().reverse()" :key="subscriber._id" :subscriber="subscriber" :index="reversedIndex(index)"></app-subscriber>
+        <app-subscriber v-for="(subscriber, index) in subscribers.slice().reverse()" :key="subscriber._id" :subscriber="subscriber" :index="subscribers.length - index"></app-subscriber>
       </tbody>
     </table>
   </div>
@@ -35,9 +35,6 @@
     computed: {
       subscribers() {
         return this.$store.getters.subscribers;  // create func in $store
-      },
-      reversedIndex(i) {
-        return this.subscribers.length - i;
       }
     },
     created() {

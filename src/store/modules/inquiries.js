@@ -15,7 +15,6 @@ export default {
       state.selectedInquiry = payload;
     },
     mergeInquiries(state, payload) {
-      // state.inquries = [].concat(state.inquiries, payload);
       // for (const item of payload) {
       //   state.inquiries.push(item);
       // }
@@ -48,10 +47,9 @@ export default {
       const inquiries = responseData.data;  // TODO 5: refactor Node.js response object?
       // console.log(inquiries);
       context.commit('mergeInquiries', inquiries);
-      console.log('Success');
     },
     async deleteInquiry(context, payload) {
-      const response = await fetch(`${rootPath}inquiry/${payload}/delete`, {
+      const response = await fetch(`${rootPath}inquiries/${payload.param}/delete`, {
         method: 'DELETE'
       });
       const responseData = await response.json();
@@ -61,7 +59,8 @@ export default {
         throw error;
       }
       // Refresh subscribers list
-      context.dispatch('fetchInquiries');
+      context.dispatch('loadMoreInquiries', payload.page);
+      context.commit('selectInquiry', null);
     },
     async saveInquiry(context, payload) {
       const response = await fetch(`${rootPath}inquiries/save`, {
