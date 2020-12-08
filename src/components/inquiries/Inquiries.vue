@@ -31,7 +31,14 @@
 			</div>
 			<div class="col-md-6 pt-1">
 				<!-- <inquiry-details :page="currentPage"></inquiry-details> -->
-        <router-view :page="currentPage"></router-view>
+				<div class="inquiry-details card">
+					<div v-if="!paramId">
+						<div class="card-body">
+							Select inquiry
+						</div>
+					</div>
+					<router-view :page="currentPage" :inquiries="inquiries"></router-view>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -50,10 +57,12 @@ export default {
 	data() {
 		return {
 			currentPage: 1,
-			// inqPerPage: 100,
 		};
 	},
 	computed: {
+		paramId() {
+			return this.$route.params.inquiryId;
+		},
 		inquiries() {
 			return this.$store.getters.inquiries;
 		},
@@ -90,5 +99,8 @@ export default {
 	overflow: -moz-scrollbars-vertical;
 	overflow-y: scroll;
 	height: 80vh;
+}
+.inquiry-details.card {
+  min-height: 80vh;
 }
 </style>

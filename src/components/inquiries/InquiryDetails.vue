@@ -1,28 +1,26 @@
 <template>
-  <div class="card">
-    <div v-if="!inquiry" class="card-body">
-      Select inquiry
+  <div v-if="!inquiry" class="card-body">
+    Select inquiry
+  </div>
+  <div v-else>
+    <div class="card-header">
+      {{ $filters.dateShort(inquiry.date) }}, {{ $filters.time(inquiry.date) }}
     </div>
-    <div v-else>
-      <div class="card-header">
-        {{ $filters.dateShort(inquiry.date) }}, {{ $filters.time(inquiry.date) }}
-      </div>
-      <div class="card-body">
-        <ul>
-          <li><b>Name:</b> {{ inquiry.name }}</li>
-          <li><b>Email:</b> {{ inquiry.email }}</li>
-          <li><b>Phone:</b> {{ inquiry.phone }}</li>
-          <li><b>Country:</b> {{ inquiry.country }}</li>
-          <li><b>Budget:</b> {{ inquiry.budget }}</li>
-          <li><b>Experience:</b> {{ inquiry.bgr }}</li>
-          <br>
-          <li><b>Message:</b> {{ inquiry.text }}</li>
-          <br>
-          <li><b>Page:</b> {{ inquiry.page }}</li>
-        </ul>
-        <div class="control-buttons">
-          <button @click="deleteItem" class="btn btn-secondary btn-sm">Delete</button>
-        </div>
+    <div class="card-body">
+      <ul>
+        <li><b>Name:</b> {{ inquiry.name }}</li>
+        <li><b>Email:</b> {{ inquiry.email }}</li>
+        <li><b>Phone:</b> {{ inquiry.phone }}</li>
+        <li><b>Country:</b> {{ inquiry.country }}</li>
+        <li><b>Budget:</b> {{ inquiry.budget }}</li>
+        <li><b>Experience:</b> {{ inquiry.bgr }}</li>
+        <br>
+        <li><b>Message:</b> {{ inquiry.text }}</li>
+        <br>
+        <li><b>Page:</b> {{ inquiry.page }}</li>
+      </ul>
+      <div class="control-buttons">
+        <button @click="deleteItem" class="btn btn-secondary btn-sm">Delete</button>
       </div>
     </div>
   </div>
@@ -31,18 +29,18 @@
 <script>
 export default {
   // inject: ['inquiries'],
-  props: ['page'],
+  props: ['page', 'inquiries'],
   computed: {
     inquiryId() {
       return this.$route.params.inquiryId;
     },
     inquiry() {
-      return this.$store.getters.selectedInquiry;
+      return this.inquiries.find(inq => inq._id === this.inquiryId);
     }
   },
   methods: {
     loadInquiryDetails(inquiryId) {
-      const inquiries = this.$store.getters.inquiries;
+      const inquiries = this.inquiries;
       const inquiry = inquiries.find(el => el._id === inquiryId);
       this.$store.commit('selectInquiry', inquiry);
     },
@@ -54,28 +52,15 @@ export default {
     }
   },
   created() {
-    // this.$route.path
-    console.log(this.inquiryId);
-    this.loadInquiryDetails(this.inquiryId);
+    // this.loadInquiryDetails(this.inquiryId);
   },
-  // watch: {
-  //   inquiryId(newId) {
-  //     this.loadInquiryDetails(newId);
-  //   }
-  // },
   // reusing the same component with new data, because route changed; alternative to watch (below)
   beforeRouteUpdate(to, from, next) {
-    // console.log('TeamMembers component beforeRouteUpdate');
     // console.log(to, from);
     this.loadInquiryDetails(to.params.inquiryId);
-    console.log(this.inquiryId);
+    // console.log(this.inquiryId);
     next();
-  },
-  // watch: {
-  //   inquiry(newId) {
-  //     this.loadInquiryDetails(newId);
-  //   }
-  // }
+  }
 }
 </script>
 

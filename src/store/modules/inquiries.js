@@ -5,7 +5,7 @@ export default {
   state: {
     inquiries: [],
     selectedInquiry: null,
-    page: 1
+    // page: 1
   },
   mutations: {
     setInquiries(state, payload) {
