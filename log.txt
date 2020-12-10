@@ -13,8 +13,13 @@
   + create a table structure
   + add more and less buttons and load 100 inquiries
   + add inquiry index
-  - add delete button in the inq field
-  - add search func
+  + add delete button in the inq field
+  - add search func: 
+    1) Node.js
+      - disable case-sensitive mode
+      - add search through MongoDB filters
+    2) Vue.js 
+      - add "reset filter" button
 
 3) Orders
 

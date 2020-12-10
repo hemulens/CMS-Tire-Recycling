@@ -84,7 +84,9 @@ export default {
 			} else if (page === '-') {
 				this.currentPage--;
 			}
-			this.$store.dispatch('loadMoreInquiries', this.currentPage);
+			this.$store.dispatch('fetchInquiries', {
+				page: this.currentPage
+			});
 			// console.log(this.$store.getters.inquiries);
 		},
 	},

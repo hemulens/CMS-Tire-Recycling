@@ -13,17 +13,38 @@ export default {
     selectInquiry(state, payload) {
       state.selectedInquiry = payload;
     },
-    // change
-    mergeInquiries(state, payload) {
-      // for (const item of payload) {
-      //   state.inquiries.push(item);
-      // }
-      state.inquiries = payload;
-    }
   },
   actions: {
-    async fetchInquiries(context) {
-      const response = await fetch(`${rootPath}inquiries?page=1`);
+    async fetchInquiries(context, payload) {
+      console.log('inside fetchInquiries');
+      let page;
+      let queries = '';
+      if (!payload || !payload.page) {
+        page = 1;
+      } else {
+        page = payload.page;
+      }
+      if (payload && payload.queries) {
+        console.log(payload.queries);
+        console.log(Object.keys(payload.queries));
+        console.log(Object.values(payload.queries));
+        console.log('looop');
+        for (let i = 0; i < Object.keys(payload.queries).length; i++) {
+          const key = Object.keys(payload.queries)[i]
+          const value = Object.values(payload.queries)[i];
+          console.log(Object.keys(payload.queries)[i] + ': ' + Object.values(payload.queries)[i]);
+          if (value) {
+            const string = `${key}=${value}&`;
+            queries += string;
+          }
+          // queries[Object.keys(payload.queries)[i]] = Object.values(payload.queries)[i];
+        }
+        console.log(queries);
+        // for (let k in payload.queries) {
+        //   console.log(k);
+        // }
+      }
+      const response = await fetch(`${rootPath}inquiries?page=${page}&${queries}`);
       // console.log(response);
       // console.log(`RootPath: ${rootPath}`);
       const responseData = await response.json();
@@ -34,19 +55,6 @@ export default {
       const inquiries = responseData.data;  // TODO 5: refactor Node.js response object?
       // console.log(inquiries);
       context.commit('setInquiries', inquiries);
-    },
-    async loadMoreInquiries(context, payload) {
-      const response = await fetch(`${rootPath}inquiries?page=${payload}`);
-      // console.log(response);
-      // console.log(`RootPath: ${rootPath}`);
-      const responseData = await response.json();
-      if (!response.ok || !responseData) {
-        const error = new Error(responseData.message || 'Failed to fetch inquiries.');  // TODO 5: display error in component
-        throw error;
-      }
-      const inquiries = responseData.data;  // TODO 5: refactor Node.js response object?
-      // console.log(inquiries);
-      context.commit('mergeInquiries', inquiries);
     },
     async deleteInquiry(context, payload) {
       const response = await fetch(`${rootPath}inquiries/${payload.param}/delete`, {
@@ -59,7 +67,7 @@ export default {
         throw error;
       }
       // Refresh subscribers list
-      context.dispatch('loadMoreInquiries', payload.page);
+      context.dispatch('fetchInquiries', payload.page);
       context.commit('selectInquiry', null);
     },
     async saveInquiry(context, payload) {
