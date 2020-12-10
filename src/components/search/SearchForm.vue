@@ -18,8 +18,11 @@
                 <option v-for="country in countries" :key="country">{{ country }}</option>
               </select>
             </div>
+            <div class="form-group col-md-4">
+              <input v-model="generalInput" type="text" class="form-control form-control-sm" id="generalInput" placeholder="Search anything here" :disabled="paramSearchOn">
+            </div>
             <div class="form-group col-md-2">
-              <button type="submit" class="btn btn-secondary btn-sm">
+              <button type="submit" class="btn btn-secondary btn-sm btn-block">
                 Search
                 <!-- Search icon -->
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -43,7 +46,16 @@ export default {
     return {
       name: null,
       email: null,
-      country: null
+      country: null,
+      generalInput: null
+    }
+  },
+  computed: {
+    paramSearchOn() {
+      return this.name !== null || this.email !== null || this.country !== null;
+    },
+    indexSearchOn() {
+      return this.generalInput !== null;
     }
   },
   methods: {
