@@ -17,10 +17,12 @@
   - add search func: 
     1) Node.js
       + disable case-sensitive mode
-      - add search through MongoDB filters
+      - send info about the last page (incl. in "fetchAllOnPage")
+      - add search using MongoDB filters
     2) Vue.js 
       - add "reset filter" button
+      - fetch max inq number along with inquiries
 
 3) Orders
 
-4) 
+4) Equipment Inquiries

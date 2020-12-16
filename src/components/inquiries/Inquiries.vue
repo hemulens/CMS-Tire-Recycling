@@ -23,6 +23,7 @@
 					:selectedId="selectedInquiryId"
 				></app-inquiry>
 				<button
+					v-if="!onLastPage"
 					@click="loadMore('+')"
 					class="btn btn-secondary btn-sm btn-block mb-1"
 				>
@@ -56,7 +57,7 @@ export default {
 	},
 	data() {
 		return {
-			currentPage: 1,
+			currentPage: 1
 		};
 	},
 	computed: {
@@ -65,6 +66,9 @@ export default {
 		},
 		inquiries() {
 			return this.$store.getters.inquiries;
+		},
+		lastPage() {
+			return this.$store.getters.lastPage;
 		},
 		selectedInquiryId() {
 			const selectedInquiry = this.$store.getters.selectedInquiry;
@@ -76,6 +80,9 @@ export default {
 		onFirstPage() {
 			return this.currentPage === 1;
 		},
+		onLastPage() {
+			return this.lastPage;
+		}
 	},
 	methods: {
 		loadMore(page) {

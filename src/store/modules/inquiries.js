@@ -4,11 +4,13 @@ import { rootPath } from '../../util/util.js';
 export default {
   state: {
     inquiries: [],
+    lastPage: true,
     selectedInquiry: null,
   },
   mutations: {
     setInquiries(state, payload) {
-      state.inquiries = payload;
+      state.inquiries = payload.items;
+      state.lastPage = payload.lastPage;
     },
     selectInquiry(state, payload) {
       state.selectedInquiry = payload;
@@ -52,9 +54,9 @@ export default {
         const error = new Error(responseData.message || 'Failed to fetch inquiries.');  // TODO 5: display error in component
         throw error;
       }
-      const inquiries = responseData.data;  // TODO 5: refactor Node.js response object?
-      // console.log(inquiries);
-      context.commit('setInquiries', inquiries);
+      const data = responseData.data;  // TODO 5: refactor Node.js response object?
+      console.log(data);
+      context.commit('setInquiries', data);
     },
     async deleteInquiry(context, payload) {
       const response = await fetch(`${rootPath}inquiries/${payload.param}/delete`, {
@@ -66,7 +68,7 @@ export default {
         const error = new Error(responseData.message || 'Failed to delete the inquiry.');  // TODO 5: display error in component
         throw error;
       }
-      // Refresh subscribers list
+      // Refresh inquiries list
       context.dispatch('fetchInquiries', payload.page);
       context.commit('selectInquiry', null);
     },
@@ -92,6 +94,9 @@ export default {
   getters: {
     inquiries(state) {
       return state.inquiries;
+    },
+    lastPage(state) {
+      return state.lastPage;
     },
     selectedInquiry(state) {
       return state.selectedInquiry;
