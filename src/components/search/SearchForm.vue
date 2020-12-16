@@ -45,7 +45,7 @@
 								type="text"
 								class="form-control form-control-sm"
 								id="generalInput"
-								placeholder="Search anything here"
+								placeholder="Custom search (non-strict)"
 								:disabled="paramSearchOn"
 							/>
 						</div>
@@ -112,9 +112,10 @@ export default {
 				name: this.name,
 				email: this.email,
 				country: this.country,
+				search: this.indexInput
 			};
 			this.$store.dispatch('fetchInquiries', {
-				queries: queries,
+				queries: queries
 			});
 			this.clearInput();
 		},
