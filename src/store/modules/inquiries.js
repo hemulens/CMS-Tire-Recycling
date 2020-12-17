@@ -15,6 +15,14 @@ export default {
     selectInquiry(state, payload) {
       state.selectedInquiry = payload;
     },
+    // Use selectively
+    deleteInquiry(state, payload) {
+      const id = payload;
+      const index = state.inquiries.findIndex(item => {
+        return item._id === id;
+      });
+      state.inquiries.splice(index, 1);
+    }
   },
   actions: {
     async fetchInquiries(context, payload) {
@@ -59,7 +67,8 @@ export default {
       context.commit('setInquiries', data);
     },
     async deleteInquiry(context, payload) {
-      const response = await fetch(`${rootPath}inquiries/${payload.param}/delete`, {
+      const id = payload.id;
+      const response = await fetch(`${rootPath}inquiries/${id}/delete`, {
         method: 'DELETE'
       });
       const responseData = await response.json();
@@ -69,6 +78,7 @@ export default {
         throw error;
       }
       // Refresh inquiries list
+      // context.commit('deleteInquiry', id)
       context.dispatch('fetchInquiries', payload.page);
       context.commit('selectInquiry', null);
     },
