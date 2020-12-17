@@ -23,8 +23,10 @@
       - add pagination to index search model (message.js)
     2) Vue.js 
       + fetch max inq number along with inquiries
-      - delete inquiry on front end and not send request anew (orthogonality)
+      + delete inquiry on front end and not send request anew (orthogonality) [DISABLED]
+      - refetch searched inquiries + pagination when deleting item
       - add "reset filter" button
+      - move page from data to state?
 
 3) Orders
 

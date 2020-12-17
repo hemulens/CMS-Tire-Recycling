@@ -47,7 +47,7 @@ export default {
     deleteItem() {
       this.$store.dispatch('deleteInquiry', {
         id: this.inquiry._id,
-        page: this.page
+        page: this.page,
       });
     }
   },

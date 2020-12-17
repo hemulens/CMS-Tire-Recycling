@@ -88,7 +88,7 @@ export default {
 			name: null,
 			email: null,
 			country: null,
-			indexInput: null,
+			indexInput: null
 		};
 	},
 	computed: {
