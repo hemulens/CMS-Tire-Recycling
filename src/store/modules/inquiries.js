@@ -4,9 +4,8 @@ import { rootPath } from '../../util/util.js';
 export default {
   state: {
     inquiries: [],
-    lastPage: true,
+    lastPage: 1,
     selectedInquiry: null,
-    queries: null
   },
   mutations: {
     setInquiries(state, payload) {
@@ -15,42 +14,26 @@ export default {
     },
     selectInquiry(state, payload) {
       state.selectedInquiry = payload;
-    },
-    setQueries(state, payload) {
-      state.queries = payload;
-    },
-    resetQueries(state) {
-      state.queries = null;
     }
-    // // Use selectively
-    // deleteInquiry(state, payload) {
-    //   const id = payload;
-    //   const index = state.inquiries.findIndex(item => {
-    //     return item._id === id;
-    //   });
-    //   state.inquiries.splice(index, 1);
-    // }
   },
   actions: {
     async fetchInquiries(context, payload) {
       console.log('inside fetchInquiries');
       let page;
       let queries = '';
-      // TODO on load
-      const stateQueries = context.getters.queries;
+      // Check if page is not passed
       if (!payload || !payload.page) {
         page = 1;
       } else {
         page = payload.page;
       }
-      // TODO: check for queries and push to state
-      if (payload && payload.queries || stateQueries) {
+      // Check if queries are passed
+      if (payload && payload.queries) {
         // console.log(payload.queries);
         // console.log(Object.keys(payload.queries));
         // console.log(Object.values(payload.queries));
         // console.log('looop');
         // Define the 'query' string
-        context.commit('setQueries', payload.queries);
         for (let i = 0; i < Object.keys(payload.queries).length; i++) {
           const key = Object.keys(payload.queries)[i]
           const value = Object.values(payload.queries)[i];
@@ -59,12 +42,8 @@ export default {
             const string = `${key}=${value}&`;
             queries += string;
           }
-          // queries[Object.keys(payload.queries)[i]] = Object.values(payload.queries)[i];
         }
         console.log(queries);
-        // for (let k in payload.queries) {
-        //   console.log(k);
-        // }
       }
       const response = await fetch(`${rootPath}inquiries?page=${page}&${queries}`);
       // console.log(response);
@@ -97,8 +76,8 @@ export default {
         throw error;
       }
       // Refresh inquiries list
-      context.dispatch('fetchInquiries', options);
       context.commit('selectInquiry', null);
+      context.dispatch('fetchInquiries', options);
     },
     // async saveInquiry(context, payload) {
     //   const response = await fetch(`${rootPath}inquiries/save`, {
@@ -128,9 +107,6 @@ export default {
     },
     selectedInquiry(state) {
       return state.selectedInquiry;
-    },
-    queries(state) {
-      return state.queries;
     }
   }
 };

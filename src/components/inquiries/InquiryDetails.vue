@@ -29,7 +29,7 @@
 <script>
 export default {
   // inject: ['inquiries'],
-  props: ['page', 'inquiries'],
+  props: ['page', 'inquiries', 'queries'],
   computed: {
     inquiryId() {
       return this.$route.params.inquiryId;
@@ -45,9 +45,12 @@ export default {
       this.$store.commit('selectInquiry', inquiry);
     },
     deleteItem() {
+      console.log('DELETE ITEM');
+      console.log(this.queries);
       this.$store.dispatch('deleteInquiry', {
         id: this.inquiry._id,
         page: this.page,
+        queries: this.queries
       });
     }
   },

@@ -1,11 +1,11 @@
 <template>
 	<div class="container-fluid">
 		<div class="row">
-			<search-form></search-form>
+			<search-form @form-submitted="formSubmitted"></search-form>
 		</div>
 	</div>
 	<div class="container-fluid">
-		<div class="form-row">
+		<div v-if="!inquiriesEmpty" class="form-row">
 			<div class="col-md-6 item-list mt-1">
 				<button
 					v-if="!onFirstPage"
@@ -38,9 +38,12 @@
 							Select inquiry
 						</div>
 					</div>
-					<router-view :page="currentPage" :inquiries="inquiries"></router-view>
+					<router-view :page="currentPage" :inquiries="inquiries" :queries="queries"></router-view>
 				</div>
 			</div>
+		</div>
+		<div v-else>
+			No inquiries found for your queries. Please enter different keywords!
 		</div>
 	</div>
 </template>
@@ -57,7 +60,8 @@ export default {
 	},
 	data() {
 		return {
-			currentPage: 1
+			currentPage: 1,
+			queries: null
 		};
 	},
 	computed: {
@@ -81,7 +85,10 @@ export default {
 			return this.currentPage === 1;
 		},
 		onLastPage() {
-			return this.lastPage;
+			return this.currentPage === this.lastPage;
+		},
+		inquiriesEmpty() {
+			return this.inquiries.length === 0;
 		}
 	},
 	methods: {
@@ -92,10 +99,15 @@ export default {
 				this.currentPage--;
 			}
 			this.$store.dispatch('fetchInquiries', {
-				page: this.currentPage
+				page: this.currentPage,
+				queries: this.indexInput
 			});
-			// console.log(this.$store.getters.inquiries);
 		},
+		formSubmitted(queries) {
+			this.queries = queries;
+			console.log('CUSTOM EVENT "formSubmitted"');
+			console.log(this.queries);
+		}
 	},
 	created() {
 		this.$store.dispatch('fetchInquiries');
