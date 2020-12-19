@@ -66,7 +66,7 @@ export default {
 	// General styles
 	body {
 		margin-top: 41px;
-		font-size: 12px;
+		font-size: 11px;
 	}
 	// Global table settings
 	// .table {

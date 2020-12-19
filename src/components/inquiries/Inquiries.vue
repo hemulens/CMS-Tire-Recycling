@@ -103,8 +103,12 @@ export default {
 				queries: this.indexInput
 			});
 		},
+		resetCurrentPage() {
+			this.currentPage = 1;
+		},
 		formSubmitted(queries) {
 			this.queries = queries;
+			this.resetCurrentPage();
 			console.log('CUSTOM EVENT "formSubmitted"');
 			console.log(this.queries);
 		}
